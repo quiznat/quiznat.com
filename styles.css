@@ -21,6 +21,7 @@
   --color-design: #8B5CF6;
   --color-game: #10B981;
   --color-casual: #F59E0B;
+  --color-incremental: #06B6D4;
   
   /* Status colors */
   --color-status-live: #10B981;
@@ -226,6 +227,10 @@ a {
 
 .project-card--casual {
   --card-accent: var(--color-casual);
+}
+
+.project-card--incremental {
+  --card-accent: var(--color-incremental);
 }
 
 /* Card Header */
