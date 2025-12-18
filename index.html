@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiznat — Strategy Games & Design</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="site-layout">
+    <main class="site-main">
+      <div class="hero">
+        <h1 class="site-title">Quiznat</h1>
+        <p class="site-tagline">Strategy games and abstract systems design</p>
+      </div>
+
+      <nav class="project-grid">
+        <a href="https://design.quiznat.com" class="project-card project-card--design">
+          <div class="card-header">
+            <h2 class="card-title">Design Studio</h2>
+            <span class="card-status">Live</span>
+          </div>
+          <p class="card-description">Axiomatic framework for abstract perfect-information strategy games. Formal analysis of Chess, Go, and structural principles.</p>
+          <div class="card-tags">
+            <span class="tag">Game Theory</span>
+            <span class="tag">Design Principles</span>
+            <span class="tag">Formal Systems</span>
+          </div>
+        </a>
+
+        <a href="https://tiletown.quiznat.com/" class="project-card project-card--game">
+          <div class="card-header">
+            <h2 class="card-title">Tiletown</h2>
+            <span class="card-status">Live</span>
+          </div>
+          <p class="card-description">Pattern matching tile placement game. Score points by strategically placing tiles to create matching patterns.</p>
+          <div class="card-tags">
+            <span class="tag">Pattern Matching</span>
+            <span class="tag">Puzzle</span>
+            <span class="tag">Web Game</span>
+          </div>
+        </a>
+
+        <a href="https://quiznat.itch.io/its-a-match" class="project-card project-card--casual">
+          <div class="card-header">
+            <h2 class="card-title">It's a Match!</h2>
+            <span class="card-status">Live</span>
+          </div>
+          <p class="card-description">Memory matching game with 20 themed levels, multiple difficulty modes, and collectible emojis. Family-friendly puzzle fun for all ages.</p>
+          <div class="card-tags">
+            <span class="tag">Memory</span>
+            <span class="tag">Casual</span>
+            <span class="tag">Family Friendly</span>
+          </div>
+        </a>
+      </nav>
+    </main>
+
+    <footer class="site-footer">
+      <p class="footer-text">© 2024 Quiznat. Built for strategic depth.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle functionality
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  </script>
+</body>
+</html>
+

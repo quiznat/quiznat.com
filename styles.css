@@ -1,0 +1,349 @@
+/* ============================================
+   QUIZNAT.COM — LANDING PAGE
+   AAA-Grade Architecture
+   ============================================ */
+
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
+
+:root {
+  /* Colors - Light Theme */
+  --color-bg: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-text: #1A1A1A;
+  --color-text-muted: #666666;
+  --color-border: #E0E0E0;
+  --color-accent: #3B82F6;
+  --color-accent-hover: #2563EB;
+  
+  /* Project-specific colors */
+  --color-design: #8B5CF6;
+  --color-game: #10B981;
+  --color-casual: #F59E0B;
+  
+  /* Status colors */
+  --color-status-live: #10B981;
+  --color-status-wip: #F59E0B;
+  --color-status-planned: #6B7280;
+  
+  /* Spacing */
+  --spacing-1: 0.25rem;  /* 4px */
+  --spacing-2: 0.5rem;   /* 8px */
+  --spacing-3: 0.75rem;  /* 12px */
+  --spacing-4: 1rem;     /* 16px */
+  --spacing-5: 1.5rem;   /* 24px */
+  --spacing-6: 2rem;     /* 32px */
+  --spacing-8: 3rem;     /* 48px */
+  --spacing-10: 4rem;    /* 64px */
+  --spacing-12: 6rem;    /* 96px */
+  
+  /* Typography */
+  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+  
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 2rem;      /* 32px */
+  --font-size-4xl: 2.5rem;    /* 40px */
+  --font-size-5xl: 3.5rem;    /* 56px */
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  
+  /* Effects */
+  --radius-sm: 0.25rem;  /* 4px */
+  --radius-md: 0.5rem;   /* 8px */
+  --radius-lg: 0.75rem;  /* 12px */
+  --radius-xl: 1rem;     /* 16px */
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --color-bg: #0A0A0A;
+  --color-surface: #1A1A1A;
+  --color-text: #F5F5F5;
+  --color-text-muted: #A0A0A0;
+  --color-border: #2A2A2A;
+  --color-accent: #60A5FA;
+  --color-accent-hover: #3B82F6;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+
+.site-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: var(--spacing-6);
+}
+
+.site-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-8) 0;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+
+.hero {
+  text-align: center;
+  margin-bottom: var(--spacing-12);
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--spacing-3);
+  color: var(--color-text);
+}
+
+.site-tagline {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* ============================================
+   PROJECT GRID
+   ============================================ */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-6);
+  width: 100%;
+}
+
+/* ============================================
+   PROJECT CARDS
+   ============================================ */
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-accent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card:hover {
+  border-color: var(--card-accent);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.project-card--design {
+  --card-accent: var(--color-design);
+}
+
+.project-card--game {
+  --card-accent: var(--color-game);
+}
+
+.project-card--casual {
+  --card-accent: var(--color-casual);
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-text);
+}
+
+/* Status Badge */
+.card-status {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  background: var(--color-status-live);
+  color: white;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.card-status--wip {
+  background: var(--color-status-wip);
+}
+
+.card-status--planned {
+  background: var(--color-status-planned);
+}
+
+/* Card Content */
+.card-description {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-5);
+  flex-grow: 1;
+}
+
+/* Tags */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.tag {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+.site-footer {
+  text-align: center;
+  padding: var(--spacing-8) 0 var(--spacing-6);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--spacing-12);
+}
+
+.footer-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .site-title {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .site-tagline {
+    font-size: var(--font-size-lg);
+  }
+  
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .site-layout {
+    padding: var(--spacing-4);
+  }
+  
+  .site-main {
+    padding: var(--spacing-6) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .card-title {
+    font-size: var(--font-size-xl);
+  }
+}
+
