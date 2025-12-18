@@ -314,6 +314,11 @@ a {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   letter-spacing: var(--letter-spacing-normal);
+  margin-bottom: var(--spacing-2);
+}
+
+.footer-text:last-child {
+  margin-bottom: 0;
 }
 
 /* ============================================
