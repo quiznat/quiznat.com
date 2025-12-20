@@ -25,6 +25,7 @@
   
   /* Status colors */
   --color-status-live: #10B981;
+  --color-status-beta: #8B5CF6;
   --color-status-wip: #F59E0B;
   --color-status-planned: #6B7280;
   
@@ -148,6 +149,19 @@ a {
 .hero {
   text-align: center;
   margin-bottom: var(--spacing-12);
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: calc(-1 * var(--spacing-6));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-design), var(--color-game), var(--color-casual), var(--color-incremental));
+  border-radius: 2px;
 }
 
 .site-title {
@@ -158,6 +172,10 @@ a {
   line-height: var(--line-height-tight);
   margin-bottom: var(--spacing-3);
   color: var(--color-text);
+  background: linear-gradient(135deg, var(--color-text), var(--color-text-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .site-tagline {
@@ -207,8 +225,25 @@ a {
   transition: opacity var(--transition-base);
 }
 
+.project-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at top right, var(--card-accent), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+}
+
 .project-card:hover::before {
   opacity: 1;
+}
+
+.project-card:hover::after {
+  opacity: 0.03;
 }
 
 .project-card:hover {
@@ -261,6 +296,30 @@ a {
   border-radius: var(--radius-sm);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide);
+  position: relative;
+}
+
+.card-status--live {
+  background: var(--color-status-live);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  padding-left: var(--spacing-5);
+}
+
+.card-status--live::before {
+  content: '';
+  position: absolute;
+  left: var(--spacing-2);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.card-status--beta {
+  background: var(--color-status-beta);
 }
 
 .card-status--wip {
@@ -269,6 +328,26 @@ a {
 
 .card-status--planned {
   background: var(--color-status-planned);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-50%) scale(0.8);
+  }
 }
 
 /* Card Content */
@@ -297,6 +376,12 @@ a {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   letter-spacing: var(--letter-spacing-normal);
+  transition: all var(--transition-fast);
+}
+
+.project-card:hover .tag {
+  border-color: var(--card-accent);
+  color: var(--color-text);
 }
 
 /* ============================================
