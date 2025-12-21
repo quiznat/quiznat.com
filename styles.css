@@ -314,7 +314,7 @@ a {
   padding: var(--spacing-6);
   background: var(--color-surface);
   border: 2px solid var(--color-border);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-sm);
   transition: all var(--transition-base);
   cursor: pointer;
   position: relative;
