@@ -22,12 +22,14 @@
   --color-game: #10B981;
   --color-casual: #F59E0B;
   --color-incremental: #06B6D4;
+  --color-gamejam: #EF4444;
   
   /* Status colors */
   --color-status-live: #10B981;
   --color-status-beta: #8B5CF6;
   --color-status-wip: #F59E0B;
   --color-status-planned: #6B7280;
+  --color-status-gamejam: #EF4444;
   
   /* Spacing */
   --spacing-1: 0.25rem;  /* 4px */
@@ -223,17 +225,19 @@ a {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 240px;
+  width: 300px;
   height: 2px;
   background: linear-gradient(90deg, 
     transparent 0%, 
-    var(--color-design) 12.5%,
-    var(--color-design) 25%,
-    var(--color-game) 37.5%,
-    var(--color-game) 50%,
-    var(--color-casual) 62.5%,
-    var(--color-casual) 75%,
-    var(--color-incremental) 87.5%,
+    var(--color-design) 10%,
+    var(--color-design) 20%,
+    var(--color-game) 30%,
+    var(--color-game) 40%,
+    var(--color-casual) 50%,
+    var(--color-casual) 60%,
+    var(--color-incremental) 70%,
+    var(--color-incremental) 80%,
+    var(--color-gamejam) 90%,
     transparent 100%
   );
 }
@@ -390,6 +394,10 @@ a {
   --card-accent: var(--color-incremental);
 }
 
+.project-card--gamejam {
+  --card-accent: var(--color-gamejam);
+}
+
 /* Card Header */
 .card-header {
   display: flex;
@@ -486,6 +494,10 @@ a {
 
 .card-status--planned {
   background: var(--color-status-planned);
+}
+
+.card-status--gamejam {
+  background: var(--color-status-gamejam);
 }
 
 @keyframes pulse {
