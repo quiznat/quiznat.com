@@ -292,10 +292,15 @@ a {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-6);
   width: 100%;
   position: relative;
+}
+
+/* Featured card spans full width */
+.project-card--featured {
+  grid-column: 1 / -1;
 }
 
 .project-grid::before {
@@ -358,17 +363,20 @@ a {
   pointer-events: none;
 }
 
-.project-card:hover::before {
+.project-card:hover::before,
+.project-card:focus-visible::before {
   opacity: 1;
 }
 
-.project-card:hover::after {
+.project-card:hover::after,
+.project-card:focus-visible::after {
   opacity: 0.04;
 }
 
-.project-card:hover {
+.project-card:hover,
+.project-card:focus-visible {
   border-color: var(--card-accent);
-  box-shadow: 
+  box-shadow:
     -12px -12px 0 -10px var(--card-accent),
     12px -12px 0 -10px var(--card-accent),
     -12px 12px 0 -10px var(--card-accent),
@@ -376,6 +384,17 @@ a {
     0 0 0 1px var(--card-accent),
     var(--shadow-lg);
   transform: translateY(-2px);
+  outline: none;
+}
+
+.project-card:focus-visible {
+  box-shadow:
+    -12px -12px 0 -10px var(--card-accent),
+    12px -12px 0 -10px var(--card-accent),
+    -12px 12px 0 -10px var(--card-accent),
+    12px 12px 0 -10px var(--card-accent),
+    0 0 0 3px var(--card-accent),
+    var(--shadow-lg);
 }
 
 .project-card--design {
@@ -420,7 +439,8 @@ a {
   transition: width var(--transition-slow);
 }
 
-.project-card:hover .card-header::after {
+.project-card:hover .card-header::after,
+.project-card:focus-visible .card-header::after {
   width: 120px;
 }
 
@@ -446,7 +466,8 @@ a {
   transition: opacity var(--transition-base);
 }
 
-.project-card:hover .card-title::before {
+.project-card:hover .card-title::before,
+.project-card:focus-visible .card-title::before {
   opacity: 1;
 }
 
@@ -520,6 +541,28 @@ a {
   }
 }
 
+/* Entrance Animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.project-card {
+  animation: fade-in-up 0.5s ease-out both;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+
 /* Card Content */
 .card-description {
   font-size: var(--font-size-base);
@@ -563,7 +606,9 @@ a {
 }
 
 .project-card:hover .card-tags::before,
-.project-card:hover .card-tags::after {
+.project-card:hover .card-tags::after,
+.project-card:focus-visible .card-tags::before,
+.project-card:focus-visible .card-tags::after {
   opacity: 0.5;
   border-color: var(--card-accent);
 }
@@ -581,7 +626,8 @@ a {
   transition: all var(--transition-fast);
 }
 
-.project-card:hover .tag {
+.project-card:hover .tag,
+.project-card:focus-visible .tag {
   border-color: var(--card-accent);
   color: var(--color-text);
 }
@@ -621,27 +667,59 @@ a {
   margin-bottom: 0;
 }
 
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-5);
+  margin-bottom: var(--spacing-4);
+}
+
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: var(--color-accent);
+}
+
+.footer-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
 /* ============================================
    RESPONSIVE
    ============================================ */
 
 @media (max-width: 768px) {
+  body::before {
+    background-size: 30px 30px;
+    opacity: 0.15;
+  }
+
   .site-title {
     font-size: var(--font-size-4xl);
   }
-  
+
   .site-tagline {
     font-size: var(--font-size-lg);
   }
-  
+
   .project-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .site-layout {
     padding: var(--spacing-4);
   }
-  
+
   .site-main {
     padding: var(--spacing-6) 0;
   }
