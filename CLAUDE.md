@@ -22,9 +22,22 @@ All styling uses CSS custom properties (design tokens) defined at the top of `st
 - Color palette with light/dark theme support (`--color-*`)
 - Spacing scale from 4px to 96px (`--space-*`)
 - Typography scale (`--text-*`, `--font-*`)
-- Project-specific accent colors (`--accent-design`, `--accent-game`, etc.)
 
 Theme switching uses `data-theme` attribute on `<html>` with automatic detection via `prefers-color-scheme`.
+
+### Card Color Sequence
+
+Project cards use a **5-color cycling palette** that matches the hero gradient. Colors are assigned automatically by position using `nth-child` selectors—no color classes needed on individual cards.
+
+| Position | Color | Variable |
+|----------|-------|----------|
+| 1, 6, 11... | Purple | `--color-design` |
+| 2, 7, 12... | Green | `--color-game` |
+| 3, 8, 13... | Yellow | `--color-casual` |
+| 4, 9, 14... | Cyan | `--color-incremental` |
+| 5, 10, 15... | Red | `--color-gamejam` |
+
+To add a new card: just add a `.project-card` element. The color is determined by its position in the grid.
 
 ### Visual Effects
 

@@ -397,25 +397,23 @@ a {
     var(--shadow-lg);
 }
 
-.project-card--design {
-  --card-accent: var(--color-design);
-}
+/* ============================================
+   CARD COLOR SEQUENCE
+   Colors cycle through a 5-color palette that
+   matches the hero gradient order:
+   1. design (purple)
+   2. game (green)
+   3. casual (yellow)
+   4. incremental (cyan)
+   5. gamejam (red)
+   ...then repeats from 1
+   ============================================ */
 
-.project-card--game {
-  --card-accent: var(--color-game);
-}
-
-.project-card--casual {
-  --card-accent: var(--color-casual);
-}
-
-.project-card--incremental {
-  --card-accent: var(--color-incremental);
-}
-
-.project-card--gamejam {
-  --card-accent: var(--color-gamejam);
-}
+.project-card:nth-child(5n+1) { --card-accent: var(--color-design); }
+.project-card:nth-child(5n+2) { --card-accent: var(--color-game); }
+.project-card:nth-child(5n+3) { --card-accent: var(--color-casual); }
+.project-card:nth-child(5n+4) { --card-accent: var(--color-incremental); }
+.project-card:nth-child(5n+5) { --card-accent: var(--color-gamejam); }
 
 /* Card Header */
 .card-header {
