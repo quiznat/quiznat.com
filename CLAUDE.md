@@ -47,9 +47,10 @@ The `Communication_System/` directory defines distinct voices for different surf
 | File | Surface | Character |
 |------|---------|-----------|
 | Canon.md | quiznat.com | Impersonal, precise, minimal, structural |
-| Builder_X.com.md | Twitter/X | Process-forward, iterative, shows momentum |
+| Builder_X.com.md | Twitter/X (@Quiznat) | Process-forward, iterative, shows momentum |
 | Product_Template.md | Game sites | Warm, emotion-first, frames features as feelings |
 | Product_It's_a_Match!.md | match.quiznat.com | Cheerful guide, targets children/families |
+| Synergy.md | Reference | How voices relate ("Nothing should collapse into anything else") |
 
 **Key principle from Synergy.md**: "Nothing should collapse into anything else." Each surface maintains its distinct voice.
 
@@ -57,9 +58,10 @@ When writing content for this site (quiznat.com), use the Canonical Voice: state
 
 ## Project Links
 
-The landing page links to five external projects:
+The landing page links to six external projects:
 - design.quiznat.com (Design Studio)
-- tiletown.quiznat.com (Tiletown)
 - match.quiznat.com (It's a Match!)
+- tiletown.quiznat.com (Tiletown)
 - blockblast.quiznat.com (Block Blast)
+- fidchell.quiznat.com (Fidchell)
 - santa.quiznat.com (Santa's Workshop)
