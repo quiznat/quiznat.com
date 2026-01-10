@@ -71,10 +71,10 @@ When writing content for this site (quiznat.com), use the Canonical Voice: state
 
 ## Project Links
 
-The landing page links to six external projects:
+The landing page features six projects:
 - design.quiznat.com (Design Studio)
 - match.quiznat.com (It's a Match!)
 - tiletown.quiznat.com (Tiletown)
 - blockblast.quiznat.com (Block Blast)
 - fidchell.quiznat.com (Fidchell)
-- santa.quiznat.com (Santa's Workshop)
+- Santa's Nordic Workshop (Coming Soon — not linked)
