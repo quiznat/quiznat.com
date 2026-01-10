@@ -523,6 +523,10 @@ a {
   background: var(--color-status-planned);
 }
 
+.card-status--dev {
+  background: var(--color-status-wip);
+}
+
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
