@@ -519,6 +519,10 @@ a {
   background: var(--color-status-gamejam);
 }
 
+.card-status--coming-soon {
+  background: var(--color-status-planned);
+}
+
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
