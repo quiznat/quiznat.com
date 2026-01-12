@@ -64,3 +64,27 @@ Built with [tools], [time context]
 > Cardbacks polished + fixes. One week in.
 
 _This keeps momentum without drifting into promo._
+
+---
+
+## X Articles (Long-Form)
+
+X Articles allow deeper technical writeups on the same platform. Different mode, same voice.
+
+**When to use Articles:**
+- Technical deep-dives (architecture, AI implementation)
+- Project retrospectives with context
+- Historical/research content that supports a release
+
+**How it differs from tweets:**
+- Length constraint removed
+- "Deep explanation" is allowed here (unlike tweets)
+- Lore is acceptable when grounded in the build
+
+**What stays the same:**
+- Process-forward framing
+- Concrete over abstract
+- Credits tools without evangelizing
+- No hype, no audience fantasy
+
+See `Published_Fidchell_Twitter.md` for reference.
