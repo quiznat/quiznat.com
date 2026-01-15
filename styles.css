@@ -8,14 +8,14 @@
    ============================================ */
 
 :root {
-  /* Colors - Neumorphism Light Theme */
-  --color-bg: #E0E5EC;
-  --color-surface: #E0E5EC;
-  --color-text: #3D4852;
-  --color-text-muted: #6B7280;
-  --color-border: transparent;
-  --color-accent: #6C63FF;
-  --color-accent-hover: #5B54E8;
+  /* Colors - Light Theme */
+  --color-bg: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-text: #1A1A1A;
+  --color-text-muted: #666666;
+  --color-border: #E0E0E0;
+  --color-accent: #3B82F6;
+  --color-accent-hover: #2563EB;
   
   /* Project-specific colors */
   --color-design: #8B5CF6;
@@ -69,25 +69,16 @@
   --letter-spacing-normal: 0;
   --letter-spacing-wide: 0.025em;
   
-  /* Effects - Neumorphism */
-  --radius-sm: 12px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
-
-  /* Neumorphism Shadow Colors */
-  --shadow-light: rgba(255, 255, 255, 0.6);
-  --shadow-dark: rgba(163, 177, 198, 0.7);
-
-  /* Neumorphism Shadow Presets */
-  --shadow-extruded: 9px 9px 16px var(--shadow-dark), -9px -9px 16px var(--shadow-light);
-  --shadow-extruded-hover: 12px 12px 20px var(--shadow-dark), -12px -12px 20px var(--shadow-light);
-  --shadow-extruded-sm: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
-  --shadow-inset: inset 6px 6px 10px var(--shadow-dark), inset -6px -6px 10px var(--shadow-light);
-  --shadow-inset-sm: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
-
-  /* Card tint opacity */
-  --color-tint-opacity: 0.08;
+  /* Effects */
+  --radius-sm: 0.25rem;  /* 4px */
+  --radius-md: 0.5rem;   /* 8px */
+  --radius-lg: 0.75rem;  /* 12px */
+  --radius-xl: 1rem;     /* 16px */
+  --radius-2xl: 2.25rem; /* 36px - follows design rule: inner radius (--radius-sm: 4px) + gap (--spacing-6: 32px) */
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -95,21 +86,13 @@
 }
 
 [data-theme="dark"] {
-  /* Neumorphism Dark Theme */
-  --color-bg: #2D3748;
-  --color-surface: #2D3748;
-  --color-text: #E2E8F0;
-  --color-text-muted: #A0AEC0;
-  --color-border: transparent;
-  --color-accent: #8B84FF;
-  --color-accent-hover: #6C63FF;
-
-  /* Dark Neumorphism Shadows */
-  --shadow-light: rgba(255, 255, 255, 0.05);
-  --shadow-dark: rgba(0, 0, 0, 0.5);
-
-  /* Increased tint visibility on dark */
-  --color-tint-opacity: 0.12;
+  --color-bg: #0A0A0A;
+  --color-surface: #1A1A1A;
+  --color-text: #F5F5F5;
+  --color-text-muted: #A0A0A0;
+  --color-border: #2A2A2A;
+  --color-accent: #60A5FA;
+  --color-accent-hover: #3B82F6;
 }
 
 /* ============================================
@@ -136,7 +119,40 @@ body {
   position: relative;
 }
 
-/* Decorative pseudo-elements removed for neumorphism */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px),
+    linear-gradient(0deg, var(--color-border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    var(--color-border) 10%, 
+    var(--color-border) 90%, 
+    transparent 100%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
 
 a {
   color: inherit;
@@ -156,7 +172,19 @@ a {
   z-index: 1;
 }
 
-/* Layout border frame removed for neumorphism */
+.site-layout::before {
+  content: '';
+  position: fixed;
+  top: var(--spacing-6);
+  left: var(--spacing-6);
+  right: var(--spacing-6);
+  bottom: var(--spacing-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.5;
+}
 
 .site-main {
   flex-grow: 1;
@@ -180,7 +208,39 @@ a {
   padding: var(--spacing-8) 0;
 }
 
-/* Hero decorative lines removed for neumorphism */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--color-design) 10%,
+    var(--color-design) 20%,
+    var(--color-game) 30%,
+    var(--color-game) 40%,
+    var(--color-casual) 50%,
+    var(--color-casual) 60%,
+    var(--color-incremental) 70%,
+    var(--color-incremental) 80%,
+    var(--color-gamejam) 90%,
+    transparent 100%
+  );
+}
 
 .site-title {
   font-family: var(--font-display);
@@ -190,6 +250,33 @@ a {
   line-height: var(--line-height-tight);
   margin-bottom: var(--spacing-3);
   color: var(--color-text);
+  background: linear-gradient(135deg, var(--color-text), var(--color-text-muted));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  display: inline-block;
+  padding: 0 var(--spacing-6);
+}
+
+.site-title::before,
+.site-title::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.site-title::before {
+  right: 100%;
+  margin-right: var(--spacing-3);
+}
+
+.site-title::after {
+  left: 100%;
+  margin-left: var(--spacing-3);
 }
 
 .site-tagline {
@@ -216,7 +303,15 @@ a {
   grid-column: 1 / -1;
 }
 
-/* Project grid top line removed for neumorphism */
+.project-grid::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+}
 
 /* ============================================
    PROJECT CARDS
@@ -227,46 +322,79 @@ a {
   flex-direction: column;
   padding: var(--spacing-6);
   background: var(--color-surface);
-  border: none;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-extruded);
-  transition: all var(--transition-slow);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-base);
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  box-shadow: 
+    -12px -12px 0 -10px var(--color-border),
+    12px -12px 0 -10px var(--color-border),
+    -12px 12px 0 -10px var(--color-border),
+    12px 12px 0 -10px var(--color-border);
 }
 
-/* Subtle color tint overlay */
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-accent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
 .project-card::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background: var(--card-accent);
-  opacity: var(--color-tint-opacity);
-  border-radius: var(--radius-xl);
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    linear-gradient(90deg, var(--card-accent) 1px, transparent 1px),
+    linear-gradient(0deg, var(--card-accent) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0;
   transition: opacity var(--transition-slow);
+  pointer-events: none;
+}
+
+.project-card:hover::before,
+.project-card:focus-visible::before {
+  opacity: 1;
 }
 
 .project-card:hover::after,
 .project-card:focus-visible::after {
-  opacity: calc(var(--color-tint-opacity) * 1.5);
+  opacity: 0.04;
 }
 
 .project-card:hover,
 .project-card:focus-visible {
-  box-shadow: var(--shadow-extruded-hover);
-  transform: translateY(-4px);
+  border-color: var(--card-accent);
+  box-shadow:
+    -12px -12px 0 -10px var(--card-accent),
+    12px -12px 0 -10px var(--card-accent),
+    -12px 12px 0 -10px var(--card-accent),
+    12px 12px 0 -10px var(--card-accent),
+    0 0 0 1px var(--card-accent),
+    var(--shadow-lg);
+  transform: translateY(-2px);
   outline: none;
 }
 
 .project-card:focus-visible {
-  box-shadow: var(--shadow-extruded-hover), 0 0 0 3px var(--card-accent);
-}
-
-.project-card:active {
-  box-shadow: var(--shadow-inset);
-  transform: translateY(0);
+  box-shadow:
+    -12px -12px 0 -10px var(--card-accent),
+    12px -12px 0 -10px var(--card-accent),
+    -12px 12px 0 -10px var(--card-accent),
+    12px 12px 0 -10px var(--card-accent),
+    0 0 0 3px var(--card-accent),
+    var(--shadow-lg);
 }
 
 /* ============================================
@@ -293,6 +421,25 @@ a {
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+}
+
+.card-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--card-accent);
+  transition: width var(--transition-slow);
+}
+
+.project-card:hover .card-header::after,
+.project-card:focus-visible .card-header::after {
+  width: 120px;
 }
 
 .card-title {
@@ -301,27 +448,45 @@ a {
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-tight);
   color: var(--color-text);
+  position: relative;
 }
 
-/* Status Badge - Neumorphism Inset */
+.card-title::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 12px;
+  background: var(--card-accent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.project-card:hover .card-title::before,
+.project-card:focus-visible .card-title::before {
+  opacity: 1;
+}
+
+/* Status Badge */
 .card-status {
   display: inline-flex;
   align-items: center;
   padding: var(--spacing-1) var(--spacing-3);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  background: var(--color-surface);
-  color: var(--color-text);
+  background: var(--color-status-live);
+  color: white;
   border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-inset-sm);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide);
   position: relative;
 }
 
 .card-status--live {
-  background: color-mix(in srgb, var(--color-status-live) 15%, var(--color-surface));
-  color: var(--color-status-live);
+  background: var(--color-status-live);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   padding-left: var(--spacing-5);
 }
 
@@ -333,39 +498,33 @@ a {
   transform: translateY(-50%);
   width: 6px;
   height: 6px;
-  background: var(--color-status-live);
+  background: white;
   border-radius: 50%;
   animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .card-status--beta {
-  background: color-mix(in srgb, var(--color-status-beta) 15%, var(--color-surface));
-  color: var(--color-status-beta);
+  background: var(--color-status-beta);
 }
 
 .card-status--wip {
-  background: color-mix(in srgb, var(--color-status-wip) 15%, var(--color-surface));
-  color: var(--color-status-wip);
+  background: var(--color-status-wip);
 }
 
 .card-status--planned {
-  background: color-mix(in srgb, var(--color-status-planned) 15%, var(--color-surface));
-  color: var(--color-status-planned);
+  background: var(--color-status-planned);
 }
 
 .card-status--gamejam {
-  background: color-mix(in srgb, var(--color-status-gamejam) 15%, var(--color-surface));
-  color: var(--color-status-gamejam);
+  background: var(--color-status-gamejam);
 }
 
 .card-status--coming-soon {
-  background: color-mix(in srgb, var(--color-status-planned) 15%, var(--color-surface));
-  color: var(--color-status-planned);
+  background: var(--color-status-planned);
 }
 
 .card-status--dev {
-  background: color-mix(in srgb, var(--color-status-wip) 15%, var(--color-surface));
-  color: var(--color-status-wip);
+  background: var(--color-status-wip);
 }
 
 @keyframes pulse {
@@ -420,11 +579,45 @@ a {
   flex-grow: 1;
 }
 
-/* Tags - Neumorphism Inset */
+/* Tags */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-2);
+  position: relative;
+}
+
+.card-tags::before,
+.card-tags::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--color-border);
+  opacity: 0;
+  transition: all var(--transition-base);
+}
+
+.card-tags::before {
+  top: -4px;
+  left: -4px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.card-tags::after {
+  bottom: -4px;
+  right: -4px;
+  border-left: none;
+  border-top: none;
+}
+
+.project-card:hover .card-tags::before,
+.project-card:hover .card-tags::after,
+.project-card:focus-visible .card-tags::before,
+.project-card:focus-visible .card-tags::after {
+  opacity: 0.5;
+  border-color: var(--card-accent);
 }
 
 .tag {
@@ -433,18 +626,17 @@ a {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-text-muted);
-  background: var(--color-surface);
-  border: none;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-inset-sm);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   letter-spacing: var(--letter-spacing-normal);
-  transition: all var(--transition-slow);
+  transition: all var(--transition-fast);
 }
 
 .project-card:hover .tag,
 .project-card:focus-visible .tag {
+  border-color: var(--card-accent);
   color: var(--color-text);
-  box-shadow: var(--shadow-extruded-sm);
 }
 
 /* ============================================
@@ -454,7 +646,21 @@ a {
 .site-footer {
   text-align: center;
   padding: var(--spacing-8) 0 var(--spacing-6);
+  border-top: 2px solid var(--color-border);
   margin-top: var(--spacing-12);
+  position: relative;
+}
+
+.site-footer::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-text-muted), transparent);
+  opacity: 0.3;
 }
 
 .footer-text {
@@ -478,25 +684,15 @@ a {
 .footer-link {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: var(--spacing-2);
-  padding: var(--spacing-3) var(--spacing-4);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  background: var(--color-surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-extruded-sm);
-  transition: all var(--transition-slow);
+  transition: color var(--transition-fast);
 }
 
 .footer-link:hover,
 .footer-link:focus-visible {
   color: var(--color-accent);
-  box-shadow: var(--shadow-inset-sm);
-}
-
-.footer-link:active {
-  box-shadow: var(--shadow-inset);
 }
 
 .footer-link svg {
@@ -510,12 +706,9 @@ a {
    ============================================ */
 
 @media (max-width: 768px) {
-  :root {
-    /* Scale down shadows for tablet */
-    --shadow-extruded: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-    --shadow-extruded-hover: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
-    --shadow-extruded-sm: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
-    --radius-xl: 24px;
+  body::before {
+    background-size: 30px 30px;
+    opacity: 0.15;
   }
 
   .site-title {
@@ -540,18 +733,10 @@ a {
 }
 
 @media (max-width: 480px) {
-  :root {
-    /* Scale down shadows for mobile */
-    --shadow-extruded: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
-    --shadow-extruded-hover: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-    --shadow-extruded-sm: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
-    --radius-xl: 20px;
-  }
-
   .site-title {
     font-size: var(--font-size-3xl);
   }
-
+  
   .card-title {
     font-size: var(--font-size-xl);
   }
