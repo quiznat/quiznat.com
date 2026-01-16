@@ -211,6 +211,16 @@ a {
   position: relative;
 }
 
+/* Icon circle at top of card */
+.project-card::before {
+  content: '';
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--card-accent) 15%, white);
+  margin-bottom: var(--spacing-5);
+}
+
 .project-card:hover,
 .project-card:focus-visible {
   transform: scale(1.02);
@@ -251,28 +261,27 @@ a {
 .card-title {
   font-family: var(--font-display);
   font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-tight);
-  color: var(--color-text);
+  color: var(--card-accent);
 }
 
-/* Status Badge */
+/* Status Badge - matches card accent */
 .card-status {
   display: inline-flex;
   align-items: center;
   padding: var(--spacing-1) var(--spacing-3);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  background: var(--color-status-live);
-  color: white;
-  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--card-accent) 15%, white);
+  color: var(--card-accent);
+  border-radius: var(--radius-md);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-wide);
   position: relative;
 }
 
 .card-status--live {
-  background: var(--color-status-live);
   padding-left: var(--spacing-5);
 }
 
@@ -284,33 +293,9 @@ a {
   transform: translateY(-50%);
   width: 6px;
   height: 6px;
-  background: white;
+  background: var(--card-accent);
   border-radius: 50%;
   animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.card-status--beta {
-  background: var(--color-status-beta);
-}
-
-.card-status--wip {
-  background: var(--color-status-wip);
-}
-
-.card-status--planned {
-  background: var(--color-status-planned);
-}
-
-.card-status--gamejam {
-  background: var(--color-status-gamejam);
-}
-
-.card-status--coming-soon {
-  background: var(--color-status-planned);
-}
-
-.card-status--dev {
-  background: var(--color-status-wip);
 }
 
 @keyframes pulse {
@@ -365,7 +350,7 @@ a {
   flex-grow: 1;
 }
 
-/* Tags - Flat Design with Fill Hover */
+/* Tags - Match card accent */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
@@ -377,19 +362,17 @@ a {
   padding: var(--spacing-1) var(--spacing-3);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  color: var(--color-text);
+  color: var(--card-accent);
   background: transparent;
-  border: 2px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border: none;
+  border-radius: var(--radius-md);
   letter-spacing: var(--letter-spacing-normal);
   transition: all 200ms ease;
 }
 
 .project-card:hover .tag,
 .project-card:focus-visible .tag {
-  border-color: var(--card-accent);
-  background: var(--card-accent);
-  color: white;
+  background: color-mix(in srgb, var(--card-accent) 10%, transparent);
 }
 
 /* ============================================
