@@ -86,21 +86,7 @@
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark mode - Flat Design */
-[data-theme="dark"] {
-  --color-bg: #111827;
-  --color-surface: #111827;
-  --color-text: #F9FAFB;
-  --color-text-muted: #9CA3AF;
-  --color-border: #374151;
-
-  /* Darker tints for dark mode */
-  --color-design-tint: #1e1b2e;
-  --color-game-tint: #0d2620;
-  --color-casual-tint: #2a2010;
-  --color-incremental-tint: #0d2628;
-  --color-gamejam-tint: #2a1515;
-}
+/* Light mode only */
 
 /* ============================================
    RESET & BASE
