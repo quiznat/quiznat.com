@@ -211,16 +211,6 @@ a {
   position: relative;
 }
 
-/* Icon circle at top of card */
-.project-card::before {
-  content: '';
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--card-accent) 15%, white);
-  margin-bottom: var(--spacing-5);
-}
-
 .project-card:hover,
 .project-card:focus-visible {
   transform: scale(1.02);
@@ -253,9 +243,27 @@ a {
 /* Card Header */
 .card-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: var(--spacing-3);
   margin-bottom: var(--spacing-4);
+}
+
+/* Card Icon */
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--card-accent) 15%, white);
+  flex-shrink: 0;
+}
+
+.card-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--card-accent);
 }
 
 .card-title {
@@ -264,6 +272,7 @@ a {
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-tight);
   color: var(--card-accent);
+  flex-grow: 1;
 }
 
 /* Status Badge - matches card accent */
