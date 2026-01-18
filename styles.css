@@ -16,12 +16,12 @@
   --color-border: rgba(255, 255, 255, 0.15);
 
   /* Card accent colors */
-  --color-design: #8B5CF6;
-  --color-game: #10B981;
-  --color-casual: #F59E0B;
-  --color-incremental: #06B6D4;
-  --color-gamejam: #EF4444;
-  --color-crafting: #EC4899;
+  --color-design: #450BF5;
+  --color-game: #FFD966;
+  --color-casual: #0BF584;
+  --color-incremental: #F50BBA;
+  --color-gamejam: #0B7CF5;
+  --color-crafting: #BA0BF5;
 
   /* Spacing */
   --spacing-1: 0.25rem;
