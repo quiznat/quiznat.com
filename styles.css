@@ -70,6 +70,7 @@
 }
 
 html {
+  color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
@@ -173,13 +174,17 @@ img {
   border-radius: var(--radius-xl);
   overflow: hidden;
   min-height: 480px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    0 25px 50px -12px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35),
+    0 30px 60px -12px rgba(0, 0, 0, 0.6);
 }
 
 /* ============================================
@@ -320,7 +325,7 @@ img {
   font-weight: var(--font-weight-medium);
   color: var(--color-text);
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 40%, rgba(255, 255, 255, 0.2));
   border-radius: var(--radius-md);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -330,6 +335,7 @@ img {
   font-size: var(--font-size-sm);
   color: var(--color-text-subtle);
   font-weight: var(--font-weight-medium);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Card Title */
@@ -467,7 +473,7 @@ img {
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .back-to-top svg {
@@ -551,4 +557,41 @@ img {
   .stack-item:nth-child(4) { --stack-offset: 40px; }
   .stack-item:nth-child(5) { --stack-offset: 50px; }
   .stack-item:nth-child(6) { --stack-offset: 60px; }
+}
+
+/* ============================================
+   FOCUS STYLES
+   ============================================ */
+
+.project-card:focus-visible,
+.back-to-top:focus-visible,
+.footer-link:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .project-card,
+  .card-link .arrow,
+  .back-to-top,
+  .footer-link {
+    transition: none;
+  }
+
+  .project-card:hover {
+    transform: none;
+  }
+
+  .project-card:hover .card-link .arrow {
+    transform: none;
+  }
 }

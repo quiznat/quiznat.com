@@ -53,6 +53,40 @@ Decorative elements use pseudo-elements extensively:
 - Tablet: 768px
 - Mobile: 480px
 
+## Design Principles
+
+These rules govern all visual and interaction decisions. Derived from Dieter Rams, Vercel's Web Interface Guidelines, and UI Skills.
+
+### Motion
+- Only animate `transform` and `opacity` (GPU-accelerated properties)
+- Never use `transition: all` — explicitly list intended properties
+- Honor `prefers-reduced-motion` with a `reduce` media query that disables all transitions and transforms
+- Animate only to clarify cause & effect or add deliberate delight
+
+### Shadows & Depth
+- Use dual-layer shadows (ambient + directional light) on elevated surfaces
+- Tint borders and shadows toward the element's accent hue on colored backgrounds
+
+### Accessibility
+- Every interactive element must show a visible `:focus-visible` ring
+- Touch targets must be at minimum 44px on mobile
+- Never rely on color alone to convey meaning
+- Set `color-scheme: dark` on `<html>` so native controls and scrollbars match the theme
+
+### Typography
+- Use `font-variant-numeric: tabular-nums` on any aligned numeric content
+- Use curly quotes, proper ellipsis (`…`), and non-breaking spaces for units
+
+### Layout
+- Adjust optical alignment ±1px when perception beats geometry
+- Set explicit `width`/`height` on images to prevent cumulative layout shift
+- Concentric border radii: child radius ≤ parent radius, maintaining consistent inset
+
+### Performance
+- Prefer CSS over JS for layout and animation
+- Lazy-load below-the-fold images; set dimensions to reserve space
+- Set `<meta name="theme-color">` to match the page background
+
 ## Brand Voice
 
 The `Communication_System/` directory defines distinct voices for different surfaces:
