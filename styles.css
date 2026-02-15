@@ -565,9 +565,7 @@ img {
   }
 
   .stack-item {
-    position: static;
-    top: auto;
-    margin-bottom: var(--spacing-8);
+    margin-bottom: 30vh;
   }
 
   /* Reduce sticky offsets on tablet */
@@ -610,7 +608,7 @@ img {
   }
 
   .stack-item {
-    margin-bottom: var(--spacing-6);
+    margin-bottom: 25vh;
   }
 
   /* Reduce sticky offsets on mobile */
