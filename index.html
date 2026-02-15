@@ -11,12 +11,16 @@
   <meta property="og:description" content="Strategy games and abstract systems design. A personal space for exploring games, systems, and AI-assisted design.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://quiznat.com">
+  <meta property="og:image" content="https://quiznat.com/assets/design-studio-card.jpg">
+  <meta property="og:image:alt" content="Quiznat project gallery preview">
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@Quiznat">
   <meta name="twitter:title" content="Quiznat — Strategy Games & Design">
   <meta name="twitter:description" content="Strategy games and abstract systems design. A personal space for exploring games, systems, and AI-assisted design.">
+  <meta name="twitter:image" content="https://quiznat.com/assets/design-studio-card.jpg">
+  <meta name="twitter:image:alt" content="Quiznat project gallery preview">
 
   <!-- Theme -->
   <meta name="theme-color" content="#0a0a0a">
@@ -38,7 +42,7 @@
         <div class="stack-item">
           <a href="https://design.quiznat.com" class="project-card">
             <div class="card-image">
-              <img src="assets/design-studio-card.jpg" alt="Design Studio preview" width="800" height="480">
+              <img src="assets/design-studio-card.jpg" alt="Design Studio preview" width="800" height="480" decoding="async" fetchpriority="high">
             </div>
             <div class="card-content">
               <div class="card-meta">
@@ -60,7 +64,7 @@
         <div class="stack-item">
           <a href="https://match.quiznat.com" class="project-card">
             <div class="card-image">
-              <img src="assets/Learning_Lab.png" alt="It's a Match! preview" width="800" height="480">
+              <img src="assets/Learning_Lab.png" alt="It's a Match! preview" width="800" height="480" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <div class="card-meta">
@@ -82,7 +86,7 @@
         <div class="stack-item">
           <a href="https://fidchell.quiznat.com" class="project-card">
             <div class="card-image">
-              <img src="assets/fidchell.png" alt="Fidchell preview" width="800" height="480">
+              <img src="assets/fidchell.png" alt="Fidchell preview" width="800" height="480" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <div class="card-meta">
@@ -104,7 +108,7 @@
         <div class="stack-item">
           <a href="https://tiletown.quiznat.com/" class="project-card">
             <div class="card-image">
-              <img src="assets/tile_town.png" alt="Tiletown preview" width="800" height="480">
+              <img src="assets/tile_town.png" alt="Tiletown preview" width="800" height="480" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <div class="card-meta">
@@ -124,9 +128,9 @@
         </div>
 
         <div class="stack-item">
-          <a href="http://blockblast.quiznat.com/" class="project-card">
+          <a href="https://blockblast.quiznat.com/" class="project-card">
             <div class="card-image">
-              <img src="assets/block_blast.png" alt="Block Blast preview" width="800" height="480">
+              <img src="assets/block_blast.png" alt="Block Blast preview" width="800" height="480" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <div class="card-meta">
@@ -148,7 +152,7 @@
         <div class="stack-item">
           <a href="https://clauddib.quiznat.com" class="project-card project-card--clauddib">
             <div class="card-image">
-              <img src="assets/clauddib-avatar.png" alt="ClaudDib avatar art preview" width="128" height="128">
+              <img src="assets/clauddib-avatar.png" alt="ClaudDib avatar art preview" width="128" height="128" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <div class="card-meta">
@@ -170,7 +174,7 @@
         <div class="stack-item">
           <div class="project-card">
             <div class="card-image">
-              <img src="assets/santa.png" alt="Santa's Nordic Workshop preview" width="800" height="480">
+              <img src="assets/santa.png" alt="Santa's Nordic Workshop preview" width="800" height="480" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <div class="card-meta">
@@ -212,11 +216,17 @@
         </a>
       </div>
       <p class="footer-text">A personal space for exploring games, systems, and AI-assisted design.</p>
-      <p class="footer-text">© 2025 Quiznat</p>
+      <p class="footer-text">© 2026 Quiznat</p>
     </footer>
   </div>
 
   <script>
+    const cardNumbers = document.querySelectorAll('.project-stack .card-number');
+    const totalCards = cardNumbers.length;
+    cardNumbers.forEach((cardNumber, index) => {
+      cardNumber.textContent = `${String(index + 1).padStart(2, '0')} / ${String(totalCards).padStart(2, '0')}`;
+    });
+
     document.getElementById('backToTop').addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
