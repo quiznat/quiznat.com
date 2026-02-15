@@ -22,6 +22,7 @@
   --color-incremental: #F50BBA;
   --color-gamejam: #0B7CF5;
   --color-crafting: #BA0BF5;
+  --color-clauddib: #D2B48C;
 
   /* Spacing */
   --spacing-1: 0.25rem;
@@ -162,6 +163,7 @@ img {
 .stack-item:nth-child(4) { --stack-offset: 80px; }
 .stack-item:nth-child(5) { --stack-offset: 100px; }
 .stack-item:nth-child(6) { --stack-offset: 120px; }
+.stack-item:nth-child(7) { --stack-offset: 140px; }
 
 /* ============================================
    PROJECT CARDS
@@ -198,6 +200,15 @@ img {
 .stack-item:nth-child(6n+5) .project-card { --card-accent: var(--color-gamejam); }
 .stack-item:nth-child(6n+6) .project-card { --card-accent: var(--color-crafting); }
 
+.project-card--clauddib {
+  --card-accent: var(--color-clauddib);
+}
+
+.project-card--clauddib .card-image::after {
+  background: #D2B48C;
+  opacity: 0.35;
+}
+
 /* ============================================
    CARD IMAGE
    ============================================ */
@@ -229,6 +240,12 @@ img {
   object-fit: cover;
   object-position: center;
   filter: grayscale(100%);
+}
+
+.project-card--clauddib .card-image img {
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: none;
 }
 
 /* ============================================
@@ -515,6 +532,7 @@ img {
   .stack-item:nth-child(4) { --stack-offset: 60px; }
   .stack-item:nth-child(5) { --stack-offset: 75px; }
   .stack-item:nth-child(6) { --stack-offset: 90px; }
+  .stack-item:nth-child(7) { --stack-offset: 105px; }
 }
 
 @media (max-width: 640px) {
@@ -557,6 +575,7 @@ img {
   .stack-item:nth-child(4) { --stack-offset: 40px; }
   .stack-item:nth-child(5) { --stack-offset: 50px; }
   .stack-item:nth-child(6) { --stack-offset: 60px; }
+  .stack-item:nth-child(7) { --stack-offset: 70px; }
 }
 
 /* ============================================
