@@ -23,6 +23,11 @@
   --color-gamejam: #0B7CF5;
   --color-crafting: #BA0BF5;
   --color-clauddib: #D2B48C;
+  --color-clauddib-deep: #5C3D2E;
+  --color-clauddib-dusk: #8A5B3D;
+  --color-clauddib-light: #EBD5AF;
+  --color-clauddib-text: #F8E8C7;
+  --color-clauddib-text-muted: rgba(248, 232, 199, 0.82);
 
   /* Spacing */
   --spacing-1: 0.25rem;
@@ -204,9 +209,13 @@ img {
   --card-accent: var(--color-clauddib);
 }
 
+.project-card--clauddib .card-image {
+  background: linear-gradient(160deg, #2b1e16 0%, #4a3225 100%);
+}
+
 .project-card--clauddib .card-image::after {
-  background: #D2B48C;
-  opacity: 0.35;
+  background: linear-gradient(140deg, #D2B48C 0%, #CDAA7D 100%);
+  opacity: 0.42;
 }
 
 /* ============================================
@@ -246,6 +255,40 @@ img {
   object-fit: contain;
   image-rendering: pixelated;
   filter: none;
+}
+
+.project-card--clauddib .card-content {
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--color-clauddib-light) 18%, #2d2018) 0%,
+    color-mix(in srgb, var(--color-clauddib-dusk) 26%, #1f150f) 58%,
+    color-mix(in srgb, var(--color-clauddib-deep) 40%, #120d09) 100%
+  );
+}
+
+.project-card--clauddib .card-title,
+.project-card--clauddib .card-category,
+.project-card--clauddib .card-link {
+  color: var(--color-clauddib-text);
+}
+
+.project-card--clauddib .card-description,
+.project-card--clauddib .tag,
+.project-card--clauddib .card-number {
+  color: var(--color-clauddib-text-muted);
+}
+
+.project-card--clauddib .card-category {
+  background: color-mix(in srgb, var(--color-clauddib-dusk) 35%, rgba(0, 0, 0, 0.45));
+  border-color: color-mix(in srgb, var(--color-clauddib-light) 45%, rgba(255, 255, 255, 0.18));
+}
+
+.project-card--clauddib .tag {
+  background: color-mix(in srgb, var(--color-clauddib) 22%, rgba(0, 0, 0, 0.5));
+}
+
+.project-card--clauddib .card-link {
+  border-top: 1px solid color-mix(in srgb, var(--color-clauddib-light) 34%, rgba(255, 255, 255, 0.12));
 }
 
 /* ============================================
