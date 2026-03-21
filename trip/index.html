@@ -424,6 +424,7 @@ const activities = [
   {
     id: 1, name: "Water Playground", area: "Pompano Beach",
     lat: 26.2380, lng: -80.1280, cat: "water",
+    url: "https://www.pompanobeachfl.gov/residents/parks-recreation",
     desc: "Free splash pad with fountains, jets, and shallow pools. Zero-depth entry perfect for toddlers. Shaded benches for parents.",
     stars: 5, stroller: "Easy — paved area, park nearby", duration: "1–2 hrs",
     cost: "Free", best: "Morning"
@@ -431,6 +432,7 @@ const activities = [
   {
     id: 2, name: "Museum of Discovery & Science", area: "Fort Lauderdale",
     lat: 26.1224, lng: -80.1474, cat: "museum",
+    url: "https://mods.org",
     desc: "Hands-on science museum with a dedicated toddler play area. IMAX theater, otters, bats, and a gravity exhibit. Full A/C — great rain day backup.",
     stars: 5, stroller: "Easy — elevator access, wide halls", duration: "2–3 hrs",
     cost: "$20/adult, under 2 free", best: "Morning"
@@ -438,6 +440,7 @@ const activities = [
   {
     id: 3, name: "BlueFoot Pirate Adventures", area: "Fort Lauderdale",
     lat: 26.1067, lng: -80.1340, cat: "adventure",
+    url: "https://bluefootpirateadventures.com",
     desc: "Interactive pirate cruise on the Intracoastal. Kids get water guns, find treasure, and help the pirate crew. 4yo will love it; 2yo may need a lap.",
     stars: 4, stroller: "Leave at dock", duration: "1.5 hrs",
     cost: "~$30/person", best: "Morning"
@@ -445,6 +448,7 @@ const activities = [
   {
     id: 4, name: "Splash Adventure Water Park", area: "Pompano Beach",
     lat: 26.2550, lng: -80.1440, cat: "water",
+    url: "https://www.broward.org/Parks/ThingsToDo/Pages/WaterParks.aspx",
     desc: "County water park with toddler splash zone, lazy river, and slides. Swim diapers required for the little one. Lifeguards on duty.",
     stars: 5, stroller: "Wet areas — leave in locker zone", duration: "2–3 hrs",
     cost: "$8–12", best: "Morning"
@@ -452,6 +456,7 @@ const activities = [
   {
     id: 5, name: "Tradewinds Park & Stables", area: "Coconut Creek",
     lat: 26.2830, lng: -80.1850, cat: "nature",
+    url: "https://www.broward.org/Parks/Pages/Park.aspx?=41",
     desc: "Huge park with farm animals, pony rides, butterfly garden, playground, and open fields. One of the best toddler spots in Broward.",
     stars: 5, stroller: "Easy — paved paths everywhere", duration: "2–3 hrs",
     cost: "Free (parking ~$2)", best: "Morning"
@@ -459,6 +464,7 @@ const activities = [
   {
     id: 6, name: "Fern Forest Nature Center", area: "Coconut Creek",
     lat: 26.2930, lng: -80.1760, cat: "nature",
+    url: "https://www.broward.org/Parks/Pages/Park.aspx?=13",
     desc: "Quiet nature preserve with boardwalk trails through wetlands and fern-covered hammocks. Pretty but trails are narrow for wide strollers.",
     stars: 3, stroller: "Tight on boardwalks", duration: "1–1.5 hrs",
     cost: "Free", best: "Morning"
@@ -466,6 +472,7 @@ const activities = [
   {
     id: 7, name: "Quiet Waters Park", area: "Deerfield Beach",
     lat: 26.3210, lng: -80.1490, cat: "water",
+    url: "https://www.broward.org/Parks/Pages/Park.aspx?=33",
     desc: "Big park with a splash playground, fishing, cable water skiing (for the adults to watch), and shady picnic areas. Very laid-back vibe.",
     stars: 4, stroller: "Easy — paved paths", duration: "2–3 hrs",
     cost: "$2 parking", best: "Morning"
@@ -473,6 +480,7 @@ const activities = [
   {
     id: 8, name: "Sugar Sand Park", area: "Boca Raton",
     lat: 26.3770, lng: -80.1010, cat: "museum",
+    url: "https://www.sugarsandpark.org",
     desc: "Massive playground with a carousel, science museum inside (Children's Science Explorium), and community center. Top-tier toddler destination.",
     stars: 5, stroller: "Easy — fully accessible", duration: "2–3 hrs",
     cost: "Free", best: "Morning"
@@ -480,6 +488,7 @@ const activities = [
   {
     id: 9, name: "Mai-Kai Restaurant", area: "Fort Lauderdale",
     lat: 26.1780, lng: -80.1710, cat: "food",
+    url: "https://maikai.com",
     desc: "Legendary 1956 Polynesian tiki restaurant with live fire dancers and a tropical garden. Incredible atmosphere but better as a date night — loud show may overwhelm toddlers.",
     stars: 2, stroller: "Yes", duration: "2 hrs",
     cost: "$$$", best: "Evening"
@@ -487,6 +496,7 @@ const activities = [
   {
     id: 10, name: "Butterfly World", area: "Coconut Creek",
     lat: 26.2870, lng: -80.1860, cat: "nature",
+    url: "https://butterflyworld.com",
     desc: "World's largest butterfly park. Walk through screened gardens with thousands of butterflies landing on you. Also has lorikeets you can feed and a bug zoo.",
     stars: 5, stroller: "Easy — paved paths", duration: "1.5–2 hrs",
     cost: "$35/adult, $25/kid", best: "Morning"
@@ -494,6 +504,7 @@ const activities = [
   {
     id: 11, name: "Flamingo Gardens", area: "Davie",
     lat: 26.0670, lng: -80.2830, cat: "nature",
+    url: "https://flamingogardens.org",
     desc: "Botanical garden & wildlife sanctuary with flamingos, gators, panthers, a narrated tram ride, and an aviary. Lots of shade, very stroller-friendly.",
     stars: 4, stroller: "Mostly paved, tram is accessible", duration: "2–3 hrs",
     cost: "$22/adult, under 3 free", best: "Morning"
@@ -501,6 +512,7 @@ const activities = [
   {
     id: 12, name: "Gumbo Limbo Nature Center", area: "Boca Raton",
     lat: 26.3780, lng: -80.0680, cat: "nature",
+    url: "https://www.gumbolimbo.org",
     desc: "Sea turtle rehab center with outdoor tanks at toddler eye-level. Boardwalk through mangrove hammock, butterfly garden, and a saltwater aquarium. One of the best free attractions in the area.",
     stars: 5, stroller: "Easy — paved paths and boardwalks", duration: "1–1.5 hrs",
     cost: "Free (suggested donation)", best: "Morning"
@@ -508,6 +520,7 @@ const activities = [
   {
     id: 13, name: "Children's Museum of Boca Raton", area: "Boca Raton",
     lat: 26.3580, lng: -80.0830, cat: "museum",
+    url: "https://cmboca.org",
     desc: "Tiny hands-on museum perfectly sized for ages 2–4. Play grocery store, construction zone, art studio, and water table. Fully air-conditioned — great rain day option.",
     stars: 5, stroller: "Easy — single floor, compact", duration: "1.5–2 hrs",
     cost: "$5/person", best: "Morning"
@@ -515,6 +528,7 @@ const activities = [
   {
     id: 14, name: "Green Cay Nature Center", area: "Boynton Beach",
     lat: 26.5370, lng: -80.1290, cat: "nature",
+    url: "https://discover.pbcgov.org/parks/Pages/GreenCay.aspx",
     desc: "Elevated boardwalk loop through 100-acre wetlands. Turtles, herons, gators, and gallinules visible from the path. Shaded gazebos for breaks. Incredibly peaceful and stroller-friendly.",
     stars: 5, stroller: "Easy — wide elevated boardwalk", duration: "1–1.5 hrs",
     cost: "Free", best: "Morning"
@@ -522,6 +536,7 @@ const activities = [
   {
     id: 15, name: "The Girls Strawberry U-Pick", area: "Delray Beach",
     lat: 26.4600, lng: -80.1430, cat: "nature",
+    url: "https://www.thegirlsstrawberryupick.com",
     desc: "Strawberry picking + petting zoo + barrel train ride + fresh strawberry ice cream. Season runs through April so timing is perfect. Kids love filling their own basket.",
     stars: 5, stroller: "Leave at entrance — field is dirt rows", duration: "1–1.5 hrs",
     cost: "~$10–15 per basket", best: "Morning"
@@ -529,6 +544,7 @@ const activities = [
   {
     id: 16, name: "Animal EDventure Park", area: "Boynton Beach",
     lat: 26.5250, lng: -80.0850, cat: "nature",
+    url: "https://animaledventurepark.com",
     desc: "Small, intimate animal park with kangaroos, sloths, otters, tortoises, and lemurs. Hands-on feeding encounters included. Much more personal than a big zoo.",
     stars: 4, stroller: "Easy — paved paths, compact layout", duration: "1.5–2 hrs",
     cost: "$10/person", best: "Morning"
@@ -536,6 +552,7 @@ const activities = [
   {
     id: 17, name: "Schoolhouse Children's Museum", area: "Boynton Beach",
     lat: 26.5260, lng: -80.0620, cat: "museum",
+    url: "https://www.schoolhousemuseum.org",
     desc: "Interactive museum in a 1913 schoolhouse with a dedicated toddler cove, play village, and sensory exhibits. Pairs well with Green Cay (10 min apart).",
     stars: 4, stroller: "Easy — single floor", duration: "1–2 hrs",
     cost: "$5/person", best: "Morning"
@@ -543,6 +560,7 @@ const activities = [
   {
     id: 18, name: "Patch Reef Park / Pirates Cove", area: "Boca Raton",
     lat: 26.3690, lng: -80.1180, cat: "water",
+    url: "https://www.myboca.us/Facilities/Facility/Details/Patch-Reef-Park-8",
     desc: "Newly renovated inclusive playground with pirate ship theme plus a splash pad. Rubber flooring, shade structures, and sensory play elements. All ages welcome.",
     stars: 4, stroller: "Easy — fully accessible, paved", duration: "1.5–2 hrs",
     cost: "Free", best: "Morning"
@@ -550,6 +568,7 @@ const activities = [
   {
     id: 19, name: "Palm Beach Zoo", area: "West Palm Beach",
     lat: 26.6690, lng: -80.0710, cat: "nature",
+    url: "https://www.palmbeachzoo.org",
     desc: "Full zoo with splash pad, giraffe feeding, playground, and interactive fountain. Shaded paths. Under-2 free. Longer drive but a full morning of entertainment.",
     stars: 4, stroller: "Easy — wide paved paths", duration: "2–3 hrs",
     cost: "$25/adult, under 2 free", best: "Morning"
@@ -557,6 +576,7 @@ const activities = [
   {
     id: 20, name: "Mounts Botanical Garden", area: "West Palm Beach",
     lat: 26.6720, lng: -80.0750, cat: "nature",
+    url: "https://www.mounts.org",
     desc: "Tropical botanical garden with butterfly garden, herb garden, and a rainforest trail. Under-6 free. Shady and calm — pairs perfectly with Palm Beach Zoo next door.",
     stars: 3, stroller: "Easy — paved paths throughout", duration: "1–1.5 hrs",
     cost: "Under 6 free, adults $15", best: "Morning"
@@ -564,6 +584,7 @@ const activities = [
   {
     id: 21, name: "Daggerwing Nature Center", area: "Boca Raton",
     lat: 26.3750, lng: -80.1750, cat: "nature",
+    url: "https://www.broward.org/Parks/Pages/Park.aspx?=10",
     desc: "Small nature center with short boardwalk through cypress swamp. Live animal exhibits inside (snakes, turtles). Quick stop — good combined with nearby parks.",
     stars: 3, stroller: "Easy — short boardwalk", duration: "45 min–1 hr",
     cost: "Free", best: "Morning"
@@ -571,6 +592,7 @@ const activities = [
   {
     id: 22, name: "Pompano Beach Splash Pad", area: "Pompano Beach",
     lat: 26.2310, lng: -80.0850, cat: "water",
+    url: "https://www.pompanobeachfl.gov/residents/parks-recreation",
     desc: "Beachfront splash pad and playground right on the promenade. Ocean views, playground equipment, and water jets. Only 5 minutes from home base — perfect for a quick morning or late afternoon.",
     stars: 4, stroller: "Easy — paved promenade", duration: "1–1.5 hrs",
     cost: "Free", best: "Morning or late afternoon"
@@ -648,7 +670,7 @@ activities.forEach(a => {
     .addTo(map)
     .bindPopup(`
       <div style="font-family:'DM Sans',sans-serif;min-width:200px;">
-        <strong style="font-size:14px;">${a.name}</strong><br>
+        <a href="${a.url}" target="_blank" rel="noopener" style="font-size:14px;font-weight:700;color:#1a6b8a;text-decoration:none;">${a.name} ↗</a><br>
         <span style="color:#666;font-size:12px;">${a.area}</span><br>
         <span style="color:#f4a261;font-size:13px;">${starStr}</span><br>
         <span style="font-size:12px;color:#555;line-height:1.4;display:block;margin-top:4px;">${a.desc}</span>
@@ -666,10 +688,10 @@ activities.forEach(a => {
   let strollerClass = 'good';
   if (a.stroller.includes('Leave') || a.stroller.includes('Wet') || a.stroller.includes('Tight')) strollerClass = 'ok';
   grid.innerHTML += `
-    <div class="activity-card">
+    <div class="activity-card" onclick="window.open('${a.url}','_blank')" style="cursor:pointer;">
       <div class="card-header">
         <div class="card-num ${a.cat}">${a.id}</div>
-        <div class="card-name">${a.name}</div>
+        <div class="card-name">${a.name} <span style="font-size:0.75rem;color:var(--ocean);font-weight:400;">↗</span></div>
       </div>
       <div class="card-area">${a.area}</div>
       <div class="card-desc">${a.desc}</div>
