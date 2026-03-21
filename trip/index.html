@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Florida Vacation — Leydon-Kennedy Family</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=DM+Serif+Display&display=swap');
+
+  :root {
+    --sand: #faf6f1;
+    --ocean: #1a6b8a;
+    --ocean-light: #e8f4f8;
+    --ocean-dark: #0e4a5e;
+    --coral: #e8734a;
+    --coral-light: #fef0eb;
+    --palm: #2d8a4e;
+    --palm-light: #e8f5ec;
+    --sunset: #f4a261;
+    --sunset-light: #fef5eb;
+    --night: #1a1a2e;
+    --gray-100: #f7f7f7;
+    --gray-200: #e8e8e8;
+    --gray-400: #999;
+    --gray-600: #555;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --shadow: 0 2px 20px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--sand);
+    color: var(--night);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--ocean-dark) 0%, var(--ocean) 50%, #2d8a7a 100%);
+    color: white;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+  }
+  .hero .subtitle {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    font-weight: 400;
+  }
+  .hero .date-badge {
+    background: rgba(255,255,255,0.15);
+    padding: 4px 14px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  /* NAV TABS */
+  .tab-bar {
+    display: flex;
+    gap: 4px;
+    padding: 12px 24px;
+    background: white;
+    border-bottom: 1px solid var(--gray-200);
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab {
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--gray-400);
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab:hover { color: var(--night); background: var(--gray-100); }
+  .tab.active { background: var(--ocean); color: white; }
+
+  /* SECTIONS */
+  .section { display: none; padding: 24px; max-width: 960px; margin: 0 auto; }
+  .section.active { display: block; }
+  .section-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    color: var(--gray-600);
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+  }
+
+  /* MAP */
+  #map-section { padding: 0; max-width: 100%; }
+  #map-section.active { display: block; }
+  #map { height: 70vh; min-height: 500px; width: 100%; }
+  .map-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px 24px;
+    background: white;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .legend-chip {
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+  .legend-chip.water { background: #dbeafe; color: #1e40af; }
+  .legend-chip.nature { background: var(--palm-light); color: #166534; }
+  .legend-chip.museum { background: #f3e8ff; color: #6b21a8; }
+  .legend-chip.food { background: var(--coral-light); color: #c2410c; }
+  .legend-chip.adventure { background: var(--sunset-light); color: #b45309; }
+
+  /* ACTIVITY CARDS */
+  .activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .activity-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-200);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+  }
+  .activity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .card-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: white;
+    flex-shrink: 0;
+  }
+  .card-num.water { background: #3b82f6; }
+  .card-num.nature { background: var(--palm); }
+  .card-num.museum { background: #7c3aed; }
+  .card-num.food { background: var(--coral); }
+  .card-num.adventure { background: var(--sunset); }
+
+  .card-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    flex: 1;
+    margin-left: 12px;
+  }
+  .card-area {
+    font-size: 0.8rem;
+    color: var(--gray-400);
+    margin-left: 44px;
+    margin-bottom: 12px;
+  }
+  .card-desc {
+    font-size: 0.88rem;
+    color: var(--gray-600);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .meta-tag {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--gray-100);
+    color: var(--gray-600);
+    font-weight: 500;
+  }
+  .meta-tag.good { background: var(--palm-light); color: #166534; }
+  .meta-tag.ok { background: var(--sunset-light); color: #b45309; }
+  .meta-tag.meh { background: var(--coral-light); color: #c2410c; }
+
+  .stars {
+    color: var(--sunset);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+  }
+
+  /* ITINERARY */
+  .week-label {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.3rem;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--ocean);
+    display: inline-block;
+  }
+  .week-label:first-of-type { margin-top: 8px; }
+
+  .day-row {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .day-date {
+    width: 80px;
+    flex-shrink: 0;
+    text-align: right;
+    padding-top: 16px;
+  }
+  .day-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .day-num {
+    font-size: 0.8rem;
+    color: var(--gray-400);
+  }
+  .day-card {
+    flex: 1;
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--gray-200);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .day-card.rest { border-left-color: var(--gray-200); background: var(--gray-100); }
+  .day-card.water-day { border-left-color: #3b82f6; }
+  .day-card.nature-day { border-left-color: var(--palm); }
+  .day-card.museum-day { border-left-color: #7c3aed; }
+  .day-card.food-day { border-left-color: var(--coral); }
+  .day-card.adventure-day { border-left-color: var(--sunset); }
+
+  .day-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    width: 40px;
+    text-align: center;
+  }
+  .day-info { flex: 1; }
+  .day-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .day-detail {
+    font-size: 0.82rem;
+    color: var(--gray-600);
+    margin-top: 2px;
+  }
+
+  /* PACKING */
+  .pack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .pack-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-200);
+  }
+  .pack-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pack-card label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+  .pack-card input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--ocean);
+    cursor: pointer;
+  }
+  .pack-card label.checked {
+    text-decoration: line-through;
+    color: var(--gray-400);
+  }
+
+  /* TIPS */
+  .tip-box {
+    background: white;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray-200);
+    border-left: 4px solid var(--ocean);
+  }
+  .tip-box.warn { border-left-color: var(--coral); }
+  .tip-box h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .tip-box p {
+    font-size: 0.88rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px 30px; }
+    .section { padding: 16px; }
+    .activity-grid { grid-template-columns: 1fr; }
+    .day-row { flex-direction: column; gap: 4px; }
+    .day-date { width: auto; text-align: left; padding-top: 8px; display: flex; gap: 8px; }
+    .tab { padding: 6px 14px; font-size: 0.8rem; }
+    .pack-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Florida Vacation</h1>
+  <div class="subtitle">Mike, LeeMarie & the little ones</div>
+  <div class="date-badge">March 21 – April 3, 2026</div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab active" onclick="showTab('map-section')">Map</button>
+  <button class="tab" onclick="showTab('activities')">Activities</button>
+  <button class="tab" onclick="showTab('itinerary')">Itinerary</button>
+  <button class="tab" onclick="showTab('packing')">Packing</button>
+  <button class="tab" onclick="showTab('tips')">Tips</button>
+</div>
+
+<!-- MAP -->
+<div id="map-section" class="section active">
+  <div class="map-legend">
+    <span class="legend-chip water">Water / Splash</span>
+    <span class="legend-chip nature">Nature / Gardens</span>
+    <span class="legend-chip museum">Museum</span>
+    <span class="legend-chip adventure">Adventure</span>
+    <span class="legend-chip food">Dining</span>
+  </div>
+  <div id="map"></div>
+</div>
+
+<!-- ACTIVITIES -->
+<div id="activities" class="section">
+  <h2 class="section-title">All Activities</h2>
+  <p class="section-sub">Rated for stroller access & toddler fun (ages 2 & 4)</p>
+  <div class="activity-grid" id="activity-grid"></div>
+</div>
+
+<!-- ITINERARY -->
+<div id="itinerary" class="section">
+  <h2 class="section-title">2-Week Itinerary</h2>
+  <p class="section-sub">One activity per morning — back for lunch & naps. Rest days built in.</p>
+  <div id="itinerary-content"></div>
+</div>
+
+<!-- PACKING -->
+<div id="packing" class="section">
+  <h2 class="section-title">Packing List</h2>
+  <p class="section-sub">Tap to check off — saves automatically</p>
+  <div class="pack-grid" id="pack-grid"></div>
+</div>
+
+<!-- TIPS -->
+<div id="tips" class="section">
+  <h2 class="section-title">Tips & Notes</h2>
+  <p class="section-sub">Things to know before you go</p>
+  <div id="tips-content"></div>
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────
+const activities = [
+  {
+    id: 1, name: "Water Playground", area: "Pompano Beach",
+    lat: 26.2380, lng: -80.1280, cat: "water",
+    desc: "Free splash pad with fountains, jets, and shallow pools. Zero-depth entry perfect for toddlers. Shaded benches for parents.",
+    stars: 5, stroller: "Easy — paved area, park nearby", duration: "1–2 hrs",
+    cost: "Free", best: "Morning"
+  },
+  {
+    id: 2, name: "Museum of Discovery & Science", area: "Fort Lauderdale",
+    lat: 26.1224, lng: -80.1474, cat: "museum",
+    desc: "Hands-on science museum with a dedicated toddler play area. IMAX theater, otters, bats, and a gravity exhibit. Full A/C — great rain day backup.",
+    stars: 5, stroller: "Easy — elevator access, wide halls", duration: "2–3 hrs",
+    cost: "$20/adult, under 2 free", best: "Morning"
+  },
+  {
+    id: 3, name: "BlueFoot Pirate Adventures", area: "Fort Lauderdale",
+    lat: 26.1067, lng: -80.1340, cat: "adventure",
+    desc: "Interactive pirate cruise on the Intracoastal. Kids get water guns, find treasure, and help the pirate crew. 4yo will love it; 2yo may need a lap.",
+    stars: 4, stroller: "Leave at dock", duration: "1.5 hrs",
+    cost: "~$30/person", best: "Morning"
+  },
+  {
+    id: 4, name: "Splash Adventure Water Park", area: "Pompano Beach",
+    lat: 26.2550, lng: -80.1440, cat: "water",
+    desc: "County water park with toddler splash zone, lazy river, and slides. Swim diapers required for the little one. Lifeguards on duty.",
+    stars: 5, stroller: "Wet areas — leave in locker zone", duration: "2–3 hrs",
+    cost: "$8–12", best: "Morning"
+  },
+  {
+    id: 5, name: "Tradewinds Park & Stables", area: "Coconut Creek",
+    lat: 26.2830, lng: -80.1850, cat: "nature",
+    desc: "Huge park with farm animals, pony rides, butterfly garden, playground, and open fields. One of the best toddler spots in Broward.",
+    stars: 5, stroller: "Easy — paved paths everywhere", duration: "2–3 hrs",
+    cost: "Free (parking ~$2)", best: "Morning"
+  },
+  {
+    id: 6, name: "Fern Forest Nature Center", area: "Coconut Creek",
+    lat: 26.2930, lng: -80.1760, cat: "nature",
+    desc: "Quiet nature preserve with boardwalk trails through wetlands and fern-covered hammocks. Pretty but trails are narrow for wide strollers.",
+    stars: 3, stroller: "Tight on boardwalks", duration: "1–1.5 hrs",
+    cost: "Free", best: "Morning"
+  },
+  {
+    id: 7, name: "Quiet Waters Park", area: "Deerfield Beach",
+    lat: 26.3210, lng: -80.1490, cat: "water",
+    desc: "Big park with a splash playground, fishing, cable water skiing (for the adults to watch), and shady picnic areas. Very laid-back vibe.",
+    stars: 4, stroller: "Easy — paved paths", duration: "2–3 hrs",
+    cost: "$2 parking", best: "Morning"
+  },
+  {
+    id: 8, name: "Sugar Sand Park", area: "Boca Raton",
+    lat: 26.3770, lng: -80.1010, cat: "museum",
+    desc: "Massive playground with a carousel, science museum inside (Children's Science Explorium), and community center. Top-tier toddler destination.",
+    stars: 5, stroller: "Easy — fully accessible", duration: "2–3 hrs",
+    cost: "Free", best: "Morning"
+  },
+  {
+    id: 9, name: "Mai-Kai Restaurant", area: "Fort Lauderdale",
+    lat: 26.1780, lng: -80.1710, cat: "food",
+    desc: "Legendary 1956 Polynesian tiki restaurant with live fire dancers and a tropical garden. Incredible atmosphere but better as a date night — loud show may overwhelm toddlers.",
+    stars: 2, stroller: "Yes", duration: "2 hrs",
+    cost: "$$$", best: "Evening"
+  },
+  {
+    id: 10, name: "Butterfly World", area: "Coconut Creek",
+    lat: 26.2870, lng: -80.1860, cat: "nature",
+    desc: "World's largest butterfly park. Walk through screened gardens with thousands of butterflies landing on you. Also has lorikeets you can feed and a bug zoo.",
+    stars: 5, stroller: "Easy — paved paths", duration: "1.5–2 hrs",
+    cost: "$35/adult, $25/kid", best: "Morning"
+  },
+  {
+    id: 11, name: "Flamingo Gardens", area: "Davie",
+    lat: 26.0670, lng: -80.2830, cat: "nature",
+    desc: "Botanical garden & wildlife sanctuary with flamingos, gators, panthers, a narrated tram ride, and an aviary. Lots of shade, very stroller-friendly.",
+    stars: 4, stroller: "Mostly paved, tram is accessible", duration: "2–3 hrs",
+    cost: "$22/adult, under 3 free", best: "Morning"
+  }
+];
+
+const itinerary = [
+  { week: 1, day: "Sat", date: "Mar 21", type: "rest", icon: "🏖️", title: "Pool Day ✓", detail: "Settled in, pool day done", cat: "rest" },
+  { week: 1, day: "Sun", date: "Mar 22", type: "activity", icon: "🐴", title: "Tradewinds Park & Stables", detail: "Coconut Creek — farm animals, pony rides, playground. 20 min drive", cat: "nature" },
+  { week: 1, day: "Mon", date: "Mar 23", type: "activity", icon: "🦋", title: "Butterfly World", detail: "Coconut Creek — go early before it gets hot. Right next to Tradewinds", cat: "nature" },
+  { week: 1, day: "Tue", date: "Mar 24", type: "rest", icon: "🏖️", title: "Rest / Pool Day", detail: "Recharge the crew", cat: "rest" },
+  { week: 1, day: "Wed", date: "Mar 25", type: "activity", icon: "🔬", title: "Museum of Discovery & Science", detail: "Fort Lauderdale — A/C, toddler zone, great rain backup", cat: "museum" },
+  { week: 1, day: "Thu", date: "Mar 26", type: "activity", icon: "🦩", title: "Flamingo Gardens", detail: "Davie — flamingos, tram ride, shady gardens", cat: "nature" },
+  { week: 1, day: "Fri", date: "Mar 27", type: "activity", icon: "💦", title: "Water Playground", detail: "Pompano Beach — free splash pad, 5 min from home base", cat: "water" },
+  { week: 2, day: "Sat", date: "Mar 28", type: "rest", icon: "🏖️", title: "Rest / Pool Day", detail: "Weekend family time", cat: "rest" },
+  { week: 2, day: "Sun", date: "Mar 29", type: "activity", icon: "🎠", title: "Sugar Sand Park", detail: "Boca Raton — incredible playground + science museum", cat: "museum" },
+  { week: 2, day: "Mon", date: "Mar 30", type: "activity", icon: "🌊", title: "Splash Adventure Water Park", detail: "Pompano Beach — bring swim diapers!", cat: "water" },
+  { week: 2, day: "Tue", date: "Mar 31", type: "rest", icon: "🏖️", title: "Rest / Pool Day", detail: "Mid-week breather", cat: "rest" },
+  { week: 2, day: "Wed", date: "Apr 1", type: "activity", icon: "🏴‍☠️", title: "BlueFoot Pirate Adventures", detail: "Fort Lauderdale — book ahead! Water guns & treasure", cat: "adventure" },
+  { week: 2, day: "Thu", date: "Apr 2", type: "activity", icon: "⛲", title: "Quiet Waters Park", detail: "Deerfield Beach — splash playground + picnic", cat: "water" },
+  { week: 2, day: "Fri", date: "Apr 3", type: "rest", icon: "📦", title: "Pack Up / Pool", detail: "Departure prep — last splash", cat: "rest" },
+];
+
+const packingData = [
+  { title: "☀️ Sun & Outdoors", items: ["Sunscreen SPF 50+", "Hats for both kids", "Sunglasses (kid-size)", "Portable fan / mister", "Bug spray (kid-safe)", "Beach towels ×4"] },
+  { title: "💦 Water Days", items: ["Swim diapers (pack of 20+)", "Rash guards for kids", "Puddle jumper floaties", "Waterproof phone pouch", "Dry bag for valuables", "Water shoes for toddlers"] },
+  { title: "🎒 Daily Bag", items: ["Double stroller", "Snack bag (ALWAYS)", "Change of clothes ×2 per kid", "Sippy cups / water bottles", "Wet wipes (industrial quantity)", "Ziploc bags for wet stuff"] },
+  { title: "😴 Comfort & Health", items: ["Portable sound machine", "Pack-n-play sheet", "Benadryl / Tylenol", "First aid kit", "Band-aids (fun prints)", "Favorite stuffed animals"] },
+];
+
+const tipsData = [
+  { warn: false, title: "Morning Strategy", text: "Get out by 9am. Most places are empty before 10 and you'll be done before the worst heat. Back by noon for lunch and naps." },
+  { warn: false, title: "Cluster Your Trips", text: "Butterfly World, Tradewinds, and Fern Forest are all within 5 minutes of each other in Coconut Creek. Museum & BlueFoot are both in downtown Fort Lauderdale." },
+  { warn: false, title: "Book Ahead", text: "BlueFoot Pirate Adventures sells out — book online at least a few days ahead. Everything else is walk-up." },
+  { warn: true, title: "Mai-Kai = Date Night", text: "Incredible tiki restaurant but the fire show is loud and runs late. Best with a sitter. If grandparents are around, this is your night out." },
+  { warn: true, title: "Fern Forest — Maybe Skip", text: "Pretty but boardwalk trails are tight for a double stroller and toddlers lose interest fast. Combine with Butterfly World next door if you want a quick nature stop." },
+  { warn: false, title: "Splash Adventure — Check Dates", text: "Water parks can be seasonal. Confirm it's open before heading over. Call ahead or check their website the day before." },
+  { warn: false, title: "Hydration", text: "Florida in late March is warm and humid. Pack way more water than you think. Freeze water bottles overnight — they'll thaw perfectly by mid-morning." },
+];
+
+// ─── MAP ───────────────────────────────────────────────
+const catColors = { water: '#3b82f6', nature: '#2d8a4e', museum: '#7c3aed', adventure: '#f4a261', food: '#e8734a' };
+
+const map = L.map('map').setView([26.23, -80.15], 11);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; OpenStreetMap &copy; CARTO',
+  maxZoom: 18
+}).addTo(map);
+
+// ─── HOME BASE MARKER ──────────────────────────────────
+const homeIcon = L.divIcon({
+  className: '',
+  html: `<div style="background:#1a1a2e;color:white;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 12px rgba(0,0,0,0.4);border:3px solid white;">🏠</div>`,
+  iconSize: [36, 36],
+  iconAnchor: [18, 18]
+});
+L.marker([26.2370, -80.1050], { icon: homeIcon, zIndexOffset: 1000 })
+  .addTo(map)
+  .bindPopup(`
+    <div style="font-family:'DM Sans',sans-serif;">
+      <strong style="font-size:14px;">Home Base</strong><br>
+      <span style="color:#666;font-size:12px;">921 NE 27th Ave, Pompano Beach</span>
+    </div>
+  `);
+
+activities.forEach(a => {
+  const color = catColors[a.cat];
+  const icon = L.divIcon({
+    className: '',
+    html: `<div style="background:${color};color:white;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.3);border:2px solid white;">${a.id}</div>`,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15]
+  });
+  const starStr = '★'.repeat(a.stars) + '☆'.repeat(5 - a.stars);
+  L.marker([a.lat, a.lng], { icon })
+    .addTo(map)
+    .bindPopup(`
+      <div style="font-family:'DM Sans',sans-serif;min-width:200px;">
+        <strong style="font-size:14px;">${a.name}</strong><br>
+        <span style="color:#666;font-size:12px;">${a.area}</span><br>
+        <span style="color:#f4a261;font-size:13px;">${starStr}</span><br>
+        <span style="font-size:12px;color:#555;line-height:1.4;display:block;margin-top:4px;">${a.desc}</span>
+        <div style="margin-top:8px;font-size:11px;color:#888;">
+          ${a.duration} · ${a.cost} · Stroller: ${a.stroller}
+        </div>
+      </div>
+    `);
+});
+
+// ─── ACTIVITY CARDS ────────────────────────────────────
+const grid = document.getElementById('activity-grid');
+activities.forEach(a => {
+  const starStr = '★'.repeat(a.stars) + '☆'.repeat(5 - a.stars);
+  let strollerClass = 'good';
+  if (a.stroller.includes('Leave') || a.stroller.includes('Wet') || a.stroller.includes('Tight')) strollerClass = 'ok';
+  grid.innerHTML += `
+    <div class="activity-card">
+      <div class="card-header">
+        <div class="card-num ${a.cat}">${a.id}</div>
+        <div class="card-name">${a.name}</div>
+      </div>
+      <div class="card-area">${a.area}</div>
+      <div class="card-desc">${a.desc}</div>
+      <div class="stars">${starStr} Toddler Rating</div>
+      <div class="card-meta" style="margin-top:12px;">
+        <span class="meta-tag ${strollerClass}">🚼 ${a.stroller.split('—')[0].trim()}</span>
+        <span class="meta-tag">${a.duration}</span>
+        <span class="meta-tag">${a.cost}</span>
+        <span class="meta-tag">${a.best}</span>
+      </div>
+    </div>`;
+});
+
+// ─── ITINERARY ─────────────────────────────────────────
+const itEl = document.getElementById('itinerary-content');
+let currentWeek = 0;
+itinerary.forEach(d => {
+  if (d.week !== currentWeek) {
+    currentWeek = d.week;
+    itEl.innerHTML += `<div class="week-label">Week ${d.week}</div>`;
+  }
+  const dayClass = d.type === 'rest' ? 'rest' : d.cat + '-day';
+  itEl.innerHTML += `
+    <div class="day-row">
+      <div class="day-date">
+        <div class="day-name">${d.day}</div>
+        <div class="day-num">${d.date}</div>
+      </div>
+      <div class="day-card ${dayClass}">
+        <div class="day-icon">${d.icon}</div>
+        <div class="day-info">
+          <div class="day-title">${d.title}</div>
+          <div class="day-detail">${d.detail}</div>
+        </div>
+      </div>
+    </div>`;
+});
+
+// ─── PACKING ───────────────────────────────────────────
+const packEl = document.getElementById('pack-grid');
+packingData.forEach(cat => {
+  const saved = JSON.parse(localStorage.getItem('pack_' + cat.title) || '{}');
+  let itemsHtml = cat.items.map((item, i) => {
+    const checked = saved[i] ? 'checked' : '';
+    const cls = saved[i] ? 'checked' : '';
+    return `<label class="${cls}" onclick="this.classList.toggle('checked')">
+      <input type="checkbox" ${checked} onchange="savePack('${cat.title}', this)"> ${item}
+    </label>`;
+  }).join('');
+  packEl.innerHTML += `<div class="pack-card"><h3>${cat.title}</h3>${itemsHtml}</div>`;
+});
+
+function savePack(title, el) {
+  const card = el.closest('.pack-card');
+  const checks = card.querySelectorAll('input[type="checkbox"]');
+  const state = {};
+  checks.forEach((c, i) => { if (c.checked) state[i] = true; });
+  localStorage.setItem('pack_' + title, JSON.stringify(state));
+}
+
+// ─── TIPS ──────────────────────────────────────────────
+const tipEl = document.getElementById('tips-content');
+tipsData.forEach(t => {
+  tipEl.innerHTML += `<div class="tip-box ${t.warn ? 'warn' : ''}"><h3>${t.title}</h3><p>${t.text}</p></div>`;
+});
+
+// ─── NAV ───────────────────────────────────────────────
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'map-section') setTimeout(() => map.invalidateSize(), 100);
+}
+</script>
+</body>
+</html>
