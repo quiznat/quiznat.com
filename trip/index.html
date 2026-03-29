@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Florida Vacation — Leydon-Kennedy Family</title>
+<meta name="description" content="Family vacation dashboard for South Florida, March 21 – April 2, 2026. Activities, itinerary, packing list, and interactive map.">
+<meta property="og:title" content="Florida Vacation — Leydon-Kennedy Family">
+<meta property="og:description" content="Family vacation dashboard for South Florida, March 21 – April 2, 2026.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌴</text></svg>">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -27,18 +31,28 @@
     --gray-600: #555;
     --radius: 16px;
     --radius-sm: 10px;
-    --shadow: 0 2px 20px rgba(0,0,0,0.06);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.10);
+    --shadow: 0 2px 20px rgba(26,106,138,0.07);
+    --shadow-lg: 0 8px 40px rgba(26,106,138,0.12);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'DM Sans', -apple-system, sans-serif;
-    background: var(--sand);
+    background: linear-gradient(180deg, var(--sand) 0%, #f5f0e8 100%);
+    background-attachment: fixed;
     color: var(--night);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   /* HERO */
@@ -53,14 +67,15 @@
   }
   .hero h1 {
     font-family: 'DM Serif Display', Georgia, serif;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: -0.3px;
+    text-wrap: balance;
   }
   .hero .subtitle {
     font-size: 0.8rem;
     opacity: 0.75;
-    font-weight: 400;
+    font-weight: 500;
   }
   .hero .date-badge {
     background: rgba(255,255,255,0.15);
@@ -92,18 +107,21 @@
     background: transparent;
     color: var(--gray-400);
     white-space: nowrap;
-    transition: all 0.2s;
+    transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
   }
   .tab:hover { color: var(--night); background: var(--gray-100); }
+  .tab:active { transform: scale(0.96); }
+  .tab:focus-visible { outline: 2px solid var(--ocean); outline-offset: 2px; }
   .tab.active { background: var(--ocean); color: white; }
 
   /* SECTIONS */
-  .section { display: none; padding: 24px; max-width: 960px; margin: 0 auto; }
+  .section { display: none; padding: 32px 24px; max-width: 960px; margin: 0 auto; }
   .section.active { display: block; }
   .section-title {
     font-family: 'DM Serif Display', Georgia, serif;
     font-size: 1.8rem;
     margin-bottom: 8px;
+    text-wrap: balance;
   }
   .section-sub {
     color: var(--gray-600);
@@ -114,7 +132,7 @@
   /* MAP */
   #map-section { padding: 0; max-width: 100%; }
   #map-section.active { display: block; }
-  #map { height: 70vh; min-height: 500px; width: 100%; }
+  #map { height: 70dvh; min-height: 500px; width: 100%; }
   .map-legend {
     display: flex;
     flex-wrap: wrap;
@@ -139,7 +157,7 @@
   .activity-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
+    gap: 20px;
   }
   .activity-card {
     background: white;
@@ -147,12 +165,15 @@
     padding: 24px;
     box-shadow: var(--shadow);
     border: 1px solid var(--gray-200);
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor: default;
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    cursor: pointer;
   }
   .activity-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
+  }
+  .activity-card:active {
+    transform: translateY(0) scale(0.98);
   }
   .card-header {
     display: flex;
@@ -195,6 +216,7 @@
     color: var(--gray-600);
     margin-bottom: 16px;
     line-height: 1.5;
+    max-width: 60ch;
   }
   .card-meta {
     display: flex;
@@ -217,6 +239,7 @@
     color: var(--sunset);
     font-size: 0.85rem;
     letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
   }
 
   /* ITINERARY */
@@ -251,6 +274,7 @@
   .day-num {
     font-size: 0.8rem;
     color: var(--gray-400);
+    font-variant-numeric: tabular-nums;
   }
   .day-card {
     flex: 1;
@@ -338,7 +362,7 @@
     border: 1px solid var(--gray-200);
     border-left: 4px solid var(--ocean);
   }
-  .tip-box.warn { border-left-color: var(--coral); }
+  .tip-box.warn { border-left-color: var(--coral); background: var(--coral-light); }
   .tip-box h3 {
     font-size: 0.95rem;
     font-weight: 700;
@@ -348,6 +372,20 @@
     font-size: 0.88rem;
     color: var(--gray-600);
     line-height: 1.6;
+    max-width: 60ch;
+  }
+
+  /* FOCUS & ANIMATION */
+  .activity-card:focus-visible, .pack-card:focus-visible, .tip-box:focus-visible {
+    outline: 2px solid var(--ocean);
+    outline-offset: 2px;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .activity-card, .day-row, .pack-card, .tip-box {
+    animation: fadeUp 0.5s cubic-bezier(0.32, 0.72, 0, 1) both;
   }
 
   /* RESPONSIVE */
@@ -370,14 +408,15 @@
   <div class="date-badge">March 21 – April 2, 2026</div>
 </div>
 
-<div class="tab-bar">
+<nav class="tab-bar" aria-label="Dashboard sections">
   <button class="tab active" onclick="showTab('map-section')">Map</button>
   <button class="tab" onclick="showTab('activities')">Activities</button>
   <button class="tab" onclick="showTab('itinerary')">Itinerary</button>
   <button class="tab" onclick="showTab('packing')">Packing</button>
   <button class="tab" onclick="showTab('tips')">Tips</button>
-</div>
+</nav>
 
+<main>
 <!-- MAP -->
 <div id="map-section" class="section active">
   <div class="map-legend">
@@ -417,6 +456,7 @@
   <p class="section-sub">Things to know before you go</p>
   <div id="tips-content"></div>
 </div>
+</main>
 
 <script>
 // ─── DATA ──────────────────────────────────────────────
